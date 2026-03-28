@@ -2,26 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --gold: #D4AF37;
+    --gold-light: #F5D87A;
+    --gold-dark: #8B7320;
+    --crimson: #7B0D1E;
+    --crimson-light: #A91D3A;
+    --parchment: #F5EDD6;
+    --parchment-dark: #E8D5A3;
+    --smoke: #C9B99A;
+    --ink: #1A0A00;
+    --bg: #0D0005;
+    --bg2: #12000A;
+    --bg3: #1A0510;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--smoke);
+    cursor: url('/cursor.svg') 16 16, crosshair;
+    scrollbar-width: none; /* Firefox */
+    overflow-x: hidden;
+  }
+
+  body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-glow-gold {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
   }
 }
