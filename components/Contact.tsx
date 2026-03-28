@@ -1,107 +1,89 @@
 "use client";
 
-import { Send, Mail } from "lucide-react";
-import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Linkedin, Github, Phone } from "lucide-react";
 
 export default function Contact() {
-    const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setStatus("sending");
-        setTimeout(() => {
-            setStatus("sent");
-            setTimeout(() => setStatus("idle"), 3000);
-        }, 1500);
-    };
+    const links = [
+        { icon: <Mail className="w-5 h-5" />, label: "rdpushp1@gmail.com", href: "mailto:rdpushp1@gmail.com" },
+        { icon: <Linkedin className="w-5 h-5" />, label: "linkedin.com/in/pushpraj-dubey", href: "https://linkedin.com/in/pushpraj-dubey" },
+        { icon: <Github className="w-5 h-5" />, label: "github.com/pDubey7", href: "https://github.com/pDubey7" },
+        { icon: <Phone className="w-5 h-5" />, label: "+91 63885 66297", href: "tel:+916388566297" },
+    ];
 
     return (
-        <section id="contact" className="py-20 pb-32">
-            <h2 className="font-cinzelDecorative text-4xl text-gold mb-16 flex items-center justify-center gap-4 text-center">
-                <Send className="text-crimson w-8 h-8" />
-                Send an Owl
-            </h2>
-
-            <div className="max-w-4xl mx-auto grid md:grid-cols-5 gap-12 bg-bg2 border border-gold/20 rounded-2xl overflow-hidden shadow-2xl">
-                <div className="md:col-span-2 bg-crimson/10 p-8 border-r border-gold/10 flex flex-col justify-between">
-                    <div>
-                        <h3 className="font-cinzel text-2xl text-gold-light mb-2">Connect via Floo Network</h3>
-                        <p className="text-smoke/70 text-sm mb-8">Reach out for collaborations, potions, or just to talk about coding magic.</p>
-
-                        <div className="space-y-6">
-                            <a href="mailto:hello@example.com" className="flex items-center gap-4 text-smoke/90 hover:text-gold transition-colors">
-                                <Mail className="w-5 h-5 text-crimson-light" />
-                                <span className="font-jetbrainsMono text-sm">hello@example.com</span>
-                            </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-smoke/90 hover:text-gold transition-colors">
-                                <FaLinkedin className="w-5 h-5 text-crimson-light" />
-                                <span className="font-cinzel tracking-widest text-sm uppercase">LinkedIn</span>
-                            </a>
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-smoke/90 hover:text-gold transition-colors">
-                                <FaGithub className="w-5 h-5 text-crimson-light" />
-                                <span className="font-cinzel tracking-widest text-sm uppercase">GitHub</span>
-                            </a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-smoke/90 hover:text-gold transition-colors">
-                                <FaTwitter className="w-5 h-5 text-crimson-light" />
-                                <span className="font-cinzel tracking-widest text-sm uppercase">Twitter</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="mt-12 text-xs text-smoke/40 font-jetbrainsMono border-t border-gold/10 pt-4">
-                        IIIT Una, CSE 2027<br />
-                        Hogwarts: Gryffindor
-                    </div>
-                </div>
-
-                <div className="md:col-span-3 p-8">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label htmlFor="name" className="block font-cinzel text-sm text-gold-light mb-2 uppercase tracking-wide">Wizard&apos;s Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                required
-                                className="w-full bg-bg3 border border-gold/20 rounded-lg px-4 py-3 text-smoke focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors font-imFellEnglish text-lg"
-                                placeholder="Harry Potter"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="email" className="block font-cinzel text-sm text-gold-light mb-2 uppercase tracking-wide">Owl Address (Email)</label>
-                            <input
-                                type="email"
-                                id="email"
-                                required
-                                className="w-full bg-bg3 border border-gold/20 rounded-lg px-4 py-3 text-smoke focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors font-imFellEnglish text-lg"
-                                placeholder="harry@hogwarts.edu"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="message" className="block font-cinzel text-sm text-gold-light mb-2 uppercase tracking-wide">Parchment Message</label>
-                            <textarea
-                                id="message"
-                                rows={4}
-                                required
-                                className="w-full bg-bg3 border border-gold/20 rounded-lg px-4 py-3 text-smoke focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors font-imFellEnglish text-lg resize-none"
-                                placeholder="I solemnly swear that I am up to no good..."
-                            ></textarea>
-                        </div>
-                        <button
-                            type="submit"
-                            disabled={status !== "idle"}
-                            className={`w-full py-4 rounded-lg font-cinzel font-bold text-lg tracking-widest uppercase transition-all flex items-center justify-center gap-2 ${status === "idle" ? "bg-gold text-ink hover:bg-gold-light shadow-[0_0_15px_rgba(212,175,55,0.4)]" :
-                                status === "sending" ? "bg-smoke/20 text-smoke cursor-wait" :
-                                    "bg-green-800/50 text-green-400 border border-green-500/50"
-                                }`}
-                        >
-                            {status === "idle" && <><Send className="w-5 h-5" /> Dispatch Owl</>}
-                            {status === "sending" && "Brewing Spell..."}
-                            {status === "sent" && "Magic Dispatched!"}
-                        </button>
-                    </form>
-                </div>
+        <section id="contact" className="py-24 px-6 max-w-7xl mx-auto relative z-10 min-h-[80vh] flex flex-col items-center">
+            <div className="text-center mb-16">
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                    className="font-cinzelDecorative text-4xl md:text-5xl text-[#D4AF37] mb-4 text-glow-gold"
+                >
+                    The Owl Post
+                </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="font-imFellEnglish italic text-xl text-[#C9B99A]/80 tracking-wide"
+                >
+                    Send a message through the most reliable magical postal service
+                </motion.p>
             </div>
+
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="w-full max-w-[650px] relative mt-8"
+            >
+                {/* Decorative corner ornaments */}
+                <div className="absolute -top-2 -left-2 w-8 h-8 border-t-[3px] border-l-[3px] border-[#D4AF37] rounded-tl pointer-events-none drop-shadow-[0_0_5px_rgba(212,175,55,0.6)]" />
+                <div className="absolute -top-2 -right-2 w-8 h-8 border-t-[3px] border-r-[3px] border-[#D4AF37] rounded-tr pointer-events-none drop-shadow-[0_0_5px_rgba(212,175,55,0.6)]" />
+                <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-[3px] border-l-[3px] border-[#D4AF37] rounded-bl pointer-events-none drop-shadow-[0_0_5px_rgba(212,175,55,0.6)]" />
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-[3px] border-r-[3px] border-[#D4AF37] rounded-br pointer-events-none drop-shadow-[0_0_5px_rgba(212,175,55,0.6)]" />
+
+                <div className="bg-[#12000A]/80 backdrop-blur-sm border border-[rgba(212,175,55,0.15)] p-8 md:p-12 shadow-[0_0_30px_rgba(212,175,55,0.05)] rounded-sm flex flex-col items-center relative overflow-hidden">
+
+                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+                    <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+
+                    <p className="font-imFellEnglish italic text-xl text-[#D4AF37]/90 text-center mb-12 max-w-md mx-auto leading-relaxed">
+                        "Whether seeking a stout companion for a quest or the finest potion ingredient, your inquiry is welcome."
+                    </p>
+
+                    <div className="flex flex-col w-full gap-4 mb-12">
+                        {links.map((link, i) => (
+                            <a
+                                key={i}
+                                href={link.href}
+                                target={link.href.startsWith("http") ? "_blank" : undefined}
+                                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                className="w-full flex items-center py-4 px-6 border border-[rgba(212,175,55,0.2)] bg-[rgba(13,0,5,0.4)] hover:bg-[#D4AF37]/10 hover:border-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.2)] group transition-all duration-300 rounded relative overflow-hidden"
+                            >
+                                <div className="absolute top-0 left-0 w-1 h-full bg-[#D4AF37] scale-y-0 group-hover:scale-y-100 transition-transform origin-top" />
+                                <div className="text-[#C9B99A] group-hover:text-[#D4AF37] transition-colors mr-6 shrink-0 drop-shadow-[0_0_2px_rgba(201,185,154,0.5)]">
+                                    {link.icon}
+                                </div>
+                                <span className="font-cinzel text-sm tracking-[0.1em] text-[#C9B99A] group-hover:text-[#D4AF37] transition-colors break-all">
+                                    {link.label}
+                                </span>
+                            </a>
+                        ))}
+                    </div>
+
+                    <div className="text-center pt-8 border-t border-[rgba(212,175,55,0.15)] w-full">
+                        <p className="font-imFellEnglish italic text-sm text-[#C9B99A]/80 tracking-widest leading-loose">
+                            Available for internships &middot; Solana projects &middot; Open source <br />
+                            <span className="font-cinzel uppercase text-[#A91D3A] text-xs font-bold shadow-sm inline-block mt-2">Fluent in Python (Parseltongue)</span>
+                        </p>
+                    </div>
+                </div>
+            </motion.div>
         </section>
     );
 }
