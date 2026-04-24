@@ -3,19 +3,19 @@ import { Trophy, Award } from "lucide-react";
 export default function Achievements() {
     const achievements = [
         {
-            title: "Solana Monolith Hackathon Finalist",
-            date: "March 2026",
-            description: "Ranked among top 20 teams out of 500+ global participants for an innovative DeFi staking protocol built on Solana."
+            title: "Solana VibeGame Jam Winner",
+            date: "August 2025",
+            description: "Ranked among top 8 teams out of 500+ global participants for an innovative game built on solana."
         },
         {
-            title: "Smart India Hackathon 2025 Winner",
-            date: "December 2025",
+            title: "Smart India Hackathon 2024",
+            date: "September 2024",
             description: "Led the backend development team to secure 1st place for designing a secure cloud-based data tracking system."
         },
         {
             title: "Open Source Contributor",
             date: "Ongoing",
-            description: "Active contributor to popular web3 libraries and Node.js frameworks with multiple merged PRs."
+            description: "Active contributor to popular web3 libraries and Next.js frameworks with multiple merged PRs."
         }
     ];
 

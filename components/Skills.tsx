@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import Image from "next/image";
 
 export default function Skills() {
     const tomes = [
@@ -83,22 +84,24 @@ export default function Skills() {
         }
     ];
 
-    const containerVariants = {
+    const shouldReduceMotion = useReducedMotion();
+
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.15
+                staggerChildren: 0.1
             }
         }
     };
 
-    const cardVariants = {
-        hidden: { opacity: 0, y: 30 },
+    const cardVariants: Variants = {
+        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 40 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.6, ease: "easeOut" }
+            transition: { duration: 0.8, ease: "easeOut" }
         }
     };
 
@@ -150,11 +153,14 @@ export default function Skills() {
                                     key={skill.name}
                                     className="flex flex-col items-center justify-center p-3 text-center border border-[rgba(212,175,55,0.2)] rounded-lg bg-[rgba(13,0,5,0.5)] group/pill hover:border-[#D4AF37] hover:bg-[rgba(212,175,55,0.1)] transition-colors"
                                 >
-                                    <div className="w-8 h-8 mb-2 flex items-center justify-center">
-                                        <img
+                                    <div className="w-8 h-8 mb-2 flex items-center justify-center relative">
+                                        <Image
                                             src={skill.icon}
                                             alt={skill.name}
-                                            className="max-w-full max-h-full object-contain filter drop-shadow-[0_0_2px_rgba(0,0,0,1)] group-hover/pill:drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]"
+                                            fill
+                                            unoptimized
+                                            sizes="32px"
+                                            className="object-contain filter drop-shadow-[0_0_2px_rgba(0,0,0,1)] group-hover/pill:drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]"
                                         />
                                     </div>
                                     <span className="font-jetbrainsMono text-[0.7rem] text-[#C9B99A] group-hover/pill:text-[#D4AF37] transition-colors line-clamp-1 break-all">

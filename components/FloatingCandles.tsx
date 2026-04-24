@@ -1,7 +1,8 @@
+// components/FloatingCandles.tsx
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 interface Candle {
     id: number;
@@ -13,8 +14,19 @@ interface Candle {
 
 export default function FloatingCandles() {
     const [candles, setCandles] = useState<Candle[]>([]);
+    const shouldReduceMotion = useReducedMotion();
+    const [isMobile, setIsMobile] = useState(true);
 
     useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    useEffect(() => {
+        if (shouldReduceMotion || isMobile) return;
+
         const generateCandle = (id: number): Candle => ({
             id,
             x: Math.random() * 90 + 5,
@@ -38,10 +50,12 @@ export default function FloatingCandles() {
         }, 8000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [shouldReduceMotion, isMobile]);
+
+    if (shouldReduceMotion || isMobile) return null;
 
     return (
-        <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden" aria-hidden="true">
             <AnimatePresence>
                 {candles.map((candle) => (
                     <motion.div

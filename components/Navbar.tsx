@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { openMaraudersMap } from "@/lib/easterEggs";
 
@@ -33,17 +33,17 @@ export default function Navbar() {
     };
 
     // Stagger variants for desktop nav
-    const linkVariants = {
-        hidden: { opacity: 0, y: -20 },
+    const linkVariants: Variants = {
+        hidden: { opacity: 0, y: -10 },
         visible: (i: number) => ({
             opacity: 1,
             y: 0,
             transition: {
                 delay: i * 0.1,
                 duration: 0.5,
-                ease: "easeOut",
-            },
-        }),
+                ease: "easeOut" as const
+            }
+        })
     };
 
     return (

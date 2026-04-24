@@ -19,7 +19,7 @@ export default function About() {
                             Like a true Gryffindor, I dive headfirst into complex challenges with courage, forging robust backend systems and deploying scalable infrastructure.
                         </p>
                         <p>
-                            My journey involves weaving spells in <span className="text-crimson-light font-jetbrainsMono bg-crimson/10 px-2 py-0.5 rounded">Node.js</span>, concocting smart contracts on the <span className="text-gold font-jetbrainsMono bg-gold/10 px-2 py-0.5 rounded">Solana</span> blockchain, and automating deployment pipelines using modern DevOps tools.
+                            My journey involves weaving spells in <span className="text-crimson-light font-jetbrainsMono bg-crimson/10 px-2 py-0.5 rounded">Next.js</span>, concocting smart contracts on the <span className="text-gold font-jetbrainsMono bg-gold/10 px-2 py-0.5 rounded">Solana</span> blockchain, and automating deployment pipelines using modern DevOps tools.
                         </p>
                     </div>
                     <div className="flex flex-col gap-6">
@@ -27,7 +27,7 @@ export default function About() {
                             <Server className="text-gold w-6 h-6 mt-1" />
                             <div>
                                 <h3 className="font-cinzel font-bold text-gold-light mb-1">Backend Sorcery</h3>
-                                <p className="text-sm">Designing highly-available architectures with Node.js, Express, and distributed databases.</p>
+                                <p className="text-sm">Designing highly-available architectures with Next.js, Express, and distributed databases.</p>
                             </div>
                         </div>
                         <div className="p-4 border border-gold/20 bg-bg3 rounded flex items-start gap-4 hover:border-gold/50 hover:bg-bg2 transition-colors">

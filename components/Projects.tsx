@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import Image from "next/image";
 
 export default function Projects() {
     const projects = [
@@ -59,22 +60,24 @@ export default function Projects() {
         }
     ];
 
-    const containerVariants = {
+    const shouldReduceMotion = useReducedMotion();
+
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2
+                staggerChildren: 0.15
             }
         }
     };
 
-    const cardVariants = {
-        hidden: { opacity: 0, y: 40 },
+    const cardVariants: Variants = {
+        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 50 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.7, ease: "easeOut" }
+            transition: { duration: 0.8, ease: "easeOut" }
         }
     };
 
@@ -82,19 +85,19 @@ export default function Projects() {
         <section id="projects" className="py-24 px-6 max-w-7xl mx-auto relative z-10 min-h-screen">
             <div className="text-center mb-20">
                 <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     className="font-cinzelDecorative text-4xl md:text-5xl text-[#D4AF37] mb-6 text-glow-gold"
                 >
                     Magical Artefacts
                 </motion.h2>
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2, ease: "easeOut" }}
                     className="font-imFellEnglish italic text-xl text-[#C9B99A]/80 tracking-wide max-w-2xl mx-auto"
                 >
                     Items of extraordinary power, forged through countless hours in the lab
@@ -160,11 +163,14 @@ export default function Projects() {
                         <div className="flex flex-wrap gap-3 mb-8 pt-6 border-t border-[rgba(212,175,55,0.15)] relative z-30">
                             {project.logos.map((logo, i) => (
                                 <div key={i} className="group/logo relative cursor-help">
-                                    <div className="w-8 h-8 p-1.5 bg-[#0D0005]/80 border border-[rgba(212,175,55,0.2)] rounded shadow-inner hover:border-[#D4AF37]/60 transition-colors flex justify-center items-center">
-                                        <img
+                                    <div className="w-8 h-8 p-1.5 bg-[#0D0005]/80 border border-[rgba(212,175,55,0.2)] rounded shadow-inner hover:border-[#D4AF37]/60 transition-colors flex justify-center items-center relative overflow-hidden">
+                                        <Image
                                             src={logo.url}
                                             alt={logo.name}
-                                            className="max-w-full max-h-full object-contain filter drop-shadow-[0_0_2px_rgba(0,0,0,1)] group-hover/logo:drop-shadow-[0_0_5px_rgba(212,175,55,0.5)] transition-all"
+                                            fill
+                                            unoptimized
+                                            sizes="32px"
+                                            className="object-contain p-1.5 filter drop-shadow-[0_0_2px_rgba(0,0,0,1)] group-hover/logo:drop-shadow-[0_0_5px_rgba(212,175,55,0.5)] transition-all"
                                         />
                                     </div>
                                     <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/logo:opacity-100 transition-opacity bg-[#0D0005] border border-[#D4AF37]/30 text-[#D4AF37] text-[0.6rem] font-jetbrainsMono py-1 px-2 rounded whitespace-nowrap z-40 pointer-events-none shadow-[0_4px_10px_rgba(0,0,0,0.5)]">

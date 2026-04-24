@@ -1,24 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Phone } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Mail, Phone, FileText } from "lucide-react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function Contact() {
     const links = [
         { icon: <Mail className="w-5 h-5" />, label: "rdpushp1@gmail.com", href: "mailto:rdpushp1@gmail.com" },
-        { icon: <Linkedin className="w-5 h-5" />, label: "linkedin.com/in/pushpraj-dubey", href: "https://linkedin.com/in/pushpraj-dubey" },
-        { icon: <Github className="w-5 h-5" />, label: "github.com/pDubey7", href: "https://github.com/pDubey7" },
+        { icon: <FaLinkedin className="w-5 h-5" />, label: "linkedin.com/in/pushpraj-dubey", href: "https://www.linkedin.com/in/pushpraj-dubey-02613a28a/" },
+        { icon: <FaGithub className="w-5 h-5" />, label: "github.com/pDubey7", href: "https://github.com/pDubey7" },
         { icon: <Phone className="w-5 h-5" />, label: "+91 63885 66297", href: "tel:+916388566297" },
     ];
+
+    const shouldReduceMotion = useReducedMotion();
 
     return (
         <section id="contact" className="py-24 px-6 max-w-7xl mx-auto relative z-10 min-h-[80vh] flex flex-col items-center">
             <div className="text-center mb-16">
                 <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     className="font-cinzelDecorative text-4xl md:text-5xl text-[#D4AF37] mb-4 text-glow-gold"
                 >
                     The Owl Post
@@ -27,7 +30,7 @@ export default function Contact() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2, ease: "easeOut" }}
                     className="font-imFellEnglish italic text-xl text-[#C9B99A]/80 tracking-wide"
                 >
                     Send a message through the most reliable magical postal service
@@ -76,10 +79,20 @@ export default function Contact() {
                         ))}
                     </div>
 
+                    <a
+                        href="/PushprajDubeyResume23145.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Download Resume"
+                        className="mb-10 px-10 py-4 bg-[#D4AF37] text-[#0D0005] font-cinzel font-bold tracking-widest uppercase rounded hover:bg-[#F5D87A] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 flex items-center justify-center gap-3 w-full"
+                    >
+                        <FileText className="w-5 h-5" /> Download Resume
+                    </a>
+
                     <div className="text-center pt-8 border-t border-[rgba(212,175,55,0.15)] w-full">
                         <p className="font-imFellEnglish italic text-sm text-[#C9B99A]/80 tracking-widest leading-loose">
                             Available for internships &middot; Solana projects &middot; Open source <br />
-                            <span className="font-cinzel uppercase text-[#A91D3A] text-xs font-bold shadow-sm inline-block mt-2">Fluent in Python (Parseltongue)</span>
+                            <span className="font-cinzel uppercase text-[#A91D3A] text-xs font-bold shadow-sm inline-block mt-2">Fluent in Typescript (Parseltongue)</span>
                         </p>
                     </div>
                 </div>
