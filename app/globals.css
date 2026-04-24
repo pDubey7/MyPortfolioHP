@@ -19,15 +19,16 @@
   }
 
   body {
-    background-color: var(--bg);
+    background: radial-gradient(ellipse at 50% 0%, #14003a 0%, #0d0005 35%, #08000f 70%, #0a001a 100%) fixed;
+    min-height: 100vh;
     color: var(--smoke);
-    cursor: url('/cursor.svg') 16 16, crosshair;
-    scrollbar-width: none; /* Firefox */
+    cursor: url('/cursor.svg') 4 28, crosshair;
+    scrollbar-width: none;
     overflow-x: hidden;
   }
 
   body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
+    display: none;
   }
 
   html {
@@ -35,8 +36,179 @@
   }
 }
 
+/* ── Keyframe Animations ──────────────────────────────── */
+
+@keyframes candleFlicker {
+  0%, 100% {
+    text-shadow:
+      0 0 8px rgba(212,175,55,0.5),
+      0 0 18px rgba(212,175,55,0.3),
+      0 0 35px rgba(212,175,55,0.1);
+    opacity: 1;
+  }
+  12% {
+    text-shadow:
+      0 0 14px rgba(212,175,55,0.7),
+      0 0 28px rgba(212,175,55,0.5),
+      0 0 8px rgba(245,216,122,0.3);
+    opacity: 0.97;
+  }
+  28% {
+    text-shadow:
+      0 0 6px rgba(212,175,55,0.35),
+      0 0 12px rgba(212,175,55,0.15);
+    opacity: 0.99;
+  }
+  55% {
+    text-shadow:
+      0 0 18px rgba(212,175,55,0.8),
+      0 0 36px rgba(212,175,55,0.4),
+      0 0 55px rgba(212,175,55,0.15);
+    opacity: 1;
+  }
+  78% {
+    text-shadow:
+      0 0 10px rgba(212,175,55,0.55),
+      0 0 22px rgba(212,175,55,0.25);
+    opacity: 0.98;
+  }
+}
+
+@keyframes shimmerSweep {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes rippleExpand {
+  0%   { transform: translate(-50%, -50%) scale(0); opacity: 0.75; }
+  100% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
+}
+
+@keyframes pulseGoldGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(212,175,55,0.15),
+      inset 0 0 12px rgba(212,175,55,0.04);
+  }
+  50% {
+    box-shadow:
+      0 0 45px rgba(212,175,55,0.45),
+      0 0 70px rgba(212,175,55,0.15),
+      inset 0 0 22px rgba(212,175,55,0.08);
+  }
+}
+
+@keyframes wandFloat {
+  0%, 100% { transform: translateY(0px)   rotate(-15deg); }
+  50%       { transform: translateY(-14px) rotate(-10deg); }
+}
+
+@keyframes sparkleOrbit {
+  0%   { transform: rotate(0deg)   translateX(18px) rotate(0deg);   opacity: 1; }
+  100% { transform: rotate(360deg) translateX(18px) rotate(-360deg); opacity: 1; }
+}
+
+@keyframes mistDrift {
+  0%   { transform: translateX(-10%)  scaleX(1); opacity: 0.3; }
+  50%  { transform: translateX( 5%)   scaleX(1.05); opacity: 0.5; }
+  100% { transform: translateX(-10%)  scaleX(1); opacity: 0.3; }
+}
+
+@keyframes sectionReveal {
+  0%   { opacity: 0; filter: blur(12px); transform: translateY(30px); }
+  100% { opacity: 1; filter: blur(0);    transform: translateY(0); }
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0)      rotate(0deg);   opacity: 0; }
+  8%   { opacity: 0.9; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(-110vh) rotate(540deg); opacity: 0; }
+}
+
+@keyframes sealStamp {
+  0%   { transform: scale(0) rotate(-180deg); opacity: 0; }
+  65%  { transform: scale(1.08) rotate(6deg); opacity: 1; }
+  80%  { transform: scale(0.96) rotate(-3deg); }
+  100% { transform: scale(1)   rotate(0deg);  opacity: 1; }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.4); }
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0)   scale(1); }
+  33%       { transform: translateY(-6px) scale(1.04); }
+  66%       { transform: translateY(4px)  scale(0.97); }
+}
+
+/* ── Utility Classes ─────────────────────────────────── */
+
 @layer utilities {
   .text-glow-gold {
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
+    text-shadow:
+      0 0 10px rgba(212, 175, 55, 0.5),
+      0 0 20px rgba(212, 175, 55, 0.3);
+  }
+
+  .heading-flicker {
+    animation: candleFlicker 4.5s ease-in-out infinite;
+  }
+
+  .shimmer-gold {
+    background: linear-gradient(
+      90deg,
+      #D4AF37 0%,
+      #F5D87A 30%,
+      rgba(255,255,255,0.85) 50%,
+      #F5D87A 70%,
+      #D4AF37 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerSweep 3.5s linear infinite;
+  }
+
+  .card-pulse-glow:hover {
+    animation: pulseGoldGlow 2s ease-in-out infinite;
+  }
+
+  .wand-float {
+    animation: wandFloat 3.2s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .mist-layer {
+    animation: mistDrift 8s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  .orb-float {
+    animation: orbFloat 3s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* Spell ripple on buttons – inject with JS via data-ripple */
+  .ripple-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple-wave {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.55);
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    animation: rippleExpand 0.65s ease-out forwards;
   }
 }

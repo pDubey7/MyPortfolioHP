@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 export default function Experience() {
     const experiences = [
@@ -17,7 +17,7 @@ export default function Experience() {
         }
     ];
 
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -27,12 +27,12 @@ export default function Experience() {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, x: -30 },
         visible: {
             opacity: 1,
             x: 0,
-            transition: { duration: 0.8, ease: "easeOut" }
+            transition: { duration: 0.8, ease: "easeOut" as const }
         }
     };
 
@@ -44,7 +44,7 @@ export default function Experience() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="font-cinzelDecorative text-4xl md:text-5xl text-[#D4AF37] mb-6 text-glow-gold"
+                    className="font-cinzelDecorative text-4xl md:text-5xl mb-6 shimmer-gold"
                 >
                     Quests Undertaken
                 </motion.h2>

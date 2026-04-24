@@ -9,8 +9,9 @@ import "./globals.css";
 import dynamic from "next/dynamic";
 import EasterEggsController from "@/components/EasterEggsController";
 
-const StarCanvas = dynamic(() => import("@/components/StarCanvas"), { ssr: false });
+const StarCanvas      = dynamic(() => import("@/components/StarCanvas"),      { ssr: false });
 const FloatingCandles = dynamic(() => import("@/components/FloatingCandles"), { ssr: false });
+const MagicCursor     = dynamic(() => import("@/components/MagicCursor"),     { ssr: false });
 
 const cinzelDecorative = Cinzel_Decorative({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ export default function RootLayout({
         <StarCanvas />
         <FloatingCandles />
         <EasterEggsController />
+        <MagicCursor />
         <main className="relative z-10">
           {children}
         </main>
